@@ -46,4 +46,4 @@ jobs:
          - name: install dependencies
            run: npm ci
          - name: deploy
-           run: npm build
+           run: npm run build
