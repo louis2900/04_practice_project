@@ -1,0 +1,49 @@
+name: deployment
+
+on: push
+
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps: 
+         - name: Get code
+           uses: actions/setup-node@v3
+         - name: Install NodeJS
+           uses: actions/setup-node@v3
+           with:
+             node-version: 18
+         - name: install dependencies
+           run: npm ci
+         - name: Run lint
+           run: npm lint
+
+    test:
+        needs: lint
+        runs-on: ubuntu-latest
+        steps: 
+         - name: Get Code
+           uses: actions/setup-node@v3
+         - name: Install NodeJS
+           uses: actions/setup-node@v3
+           with:
+                node-version: 18
+         - name: install dependencies
+           run: npm ci
+         - name: Run test
+           run: npm test
+
+    
+    deploy:
+        needs: test
+        runs-on: ubuntu-latest
+        steps: 
+         - name: Get Code
+           uses: actions/setup-node@v3
+         - name: Install NodeJS
+           uses: actions/setup-node@v3
+           with:
+                node-version: 18
+         - name: install dependencies
+           run: npm ci
+         - name: deploy
+           run: npm build
